@@ -36,11 +36,11 @@ namespace DiasPorExtenso.ConsoleApp
             novaData.dataDeAbertura = converteStrParaData(stringDataDeAbertura);
             novaData.delta = CalculandoDelta(novaData.dataDeAbertura);
             novaData.deltadias = ConvertDelta(novaData.delta);
-
-            Console.WriteLine(novaData.deltadias);
-
             CaldulandoDiasSemanasMessesAnos(novaData);
-            //saída final 
+
+            // -----------------------  ESCREVENDO  ------------------------
+
+            Escrevendo(novaData);
         }
 
         //----------------------  Metodos Auxiliares  ------------------------
@@ -72,8 +72,8 @@ namespace DiasPorExtenso.ConsoleApp
                     novaData.deltadias = novaData.deltadias - 365;
                     novaData.totanos++;
                 }
-            } while (novaData.deltadias < 365);
-            
+            } while (novaData.deltadias > 365);
+
             // -------------------------- MESSES  ---------------------------
             do
             {
@@ -82,7 +82,7 @@ namespace DiasPorExtenso.ConsoleApp
                     novaData.deltadias = novaData.deltadias - 30;
                     novaData.totmesses++;
                 }
-            } while (novaData.deltadias < 30);
+            } while (novaData.deltadias > 30);
 
             // -------------------------- Semanas  --------------------------
             do
@@ -92,9 +92,10 @@ namespace DiasPorExtenso.ConsoleApp
                     novaData.deltadias = novaData.deltadias - 7;
                     novaData.totsemanas++;
                 }
-            } while (novaData.deltadias < 7);
+            } while (novaData.deltadias > 7);
 
             // --------------------------  DIAS ----------------------------
+
             do
             {
                 if (novaData.deltadias >= 1)
@@ -102,7 +103,58 @@ namespace DiasPorExtenso.ConsoleApp
                     novaData.deltadias = novaData.deltadias - 1;
                     novaData.totdias++;
                 }
-            } while (novaData.deltadias < 1);
+            } while (novaData.deltadias >= 1);
+        }
+
+        private static void Escrevendo(DeltaDias novaData)
+        {
+            
+
+            if (novaData.totanos != 0)
+            {
+                if (novaData.totanos == 1)
+                {
+                    Console.Write(novaData.totanos + " ano ");
+                }
+                else
+                {
+                    Console.Write(novaData.totanos + " anos ");
+                }
+            }
+            if (novaData.totmesses != 0)
+            {
+                if (novaData.totanos == 1)
+                {
+                    Console.Write(novaData.totmesses + " mês ");
+                }
+                else
+                {
+                    Console.Write(novaData.totmesses + " messes ");
+                }
+            }
+            if (novaData.totsemanas != 0)
+            {
+                if (novaData.totsemanas == 1)
+                {
+                    Console.Write(novaData.totsemanas + " semana ");
+                }
+                else
+                {
+                    Console.Write(novaData.totsemanas + " semanas ");
+                }
+            }
+            if (novaData.totdias != 0)
+            {
+                if (novaData.totdias == 1)
+                {
+                    Console.Write(novaData.totdias + " dia ");
+                }
+                else
+                {
+                    Console.Write(novaData.totdias + " dias ");
+                }
+            }
+            Console.Write(" atrás");
         }
     }
 }
